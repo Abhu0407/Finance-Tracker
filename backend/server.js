@@ -3,15 +3,15 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 
 import authRoutes from './routes/auth.route.js';
+import incomeRoutes from './routes/income.route.js';
+import expenseRoutes from './routes/expense.route.js';
+import dashboardRoutes from './routes/dashboard.route.js';
 
 import { connectDB } from './lib/db.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 const app = express();
@@ -28,10 +28,10 @@ app.use(cors({
 
 
 app.use("/api/auth", authRoutes);
+app.use("/api/income", incomeRoutes);
+app.use("/api/expense", expenseRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
-
-// server uploads folder
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 5000;
 
