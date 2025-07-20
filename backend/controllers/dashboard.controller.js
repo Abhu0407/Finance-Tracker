@@ -17,7 +17,7 @@ export const getDashboardData = async (req, res) => {
         console.log("totalIncome", { totalIncome, userId: isValidObjectId(userId) });
 
         // Fetch total expenses for the user
-        const totalExpenses = await Expense.aggregate([
+        const totalExpense = await Expense.aggregate([
             { $match: { userId: userObjectId } },
             { $group: { _id: null, total: { $sum: "$amount" } } },
         ]);

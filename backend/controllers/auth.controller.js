@@ -5,14 +5,14 @@ import bcrypt from "bcryptjs";
 
 // generate JWT Token
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7h" });
 }
 
 
 // resister new User
 export const signup = async (req, res) => {
 
-    const { fullName, email, password, profilePic } = req.body;
+    const { fullName, email, password } = req.body;
 
     try {
         // Validation: check for missing fields
@@ -30,18 +30,16 @@ export const signup = async (req, res) => {
             fullName,
             email,
             password,
-            profilePic,
         });
 
         if (newUser) {
-            const token = generateToken(newUser._id, res);
+            const token = generateToken(newUser._id);
             await newUser.save();
 
             res.status(201).json({
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 email: newUser.email,
-                profilePic: newUser.profilePic,
                 token: token,
             });
         }
@@ -76,7 +74,7 @@ export const login = async (req, res) => {
         }
 
         // generate token
-        const token = generateToken(user._id, res);
+        const token = generateToken(user._id);
         res.status(200).json({
             _id: user._id,
             user,
@@ -100,7 +98,7 @@ export const getUserInfo = async (req, res) => {
 
         res.status(200).json(user);
     } catch (error) {
-        console.log("Error in check auth controller", error.message);
+        console.log("Error in getUserInfo controller", error.message);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
