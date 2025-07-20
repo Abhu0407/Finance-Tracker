@@ -13,7 +13,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const updateUser = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -74,7 +74,7 @@ function Login() {
             onChange={({ target }) => setEmail(target.value)}
             label="Email Address"
             placeholder="abc@example.com"
-            type="text"
+            type="email"
           />
 
           <Input
