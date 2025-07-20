@@ -12,6 +12,9 @@
     html {
         font-family: var(--font-display);
     }
+    :host {
+        -webkit-text-size-adjust: 100%;
+    }
 
     body {
         background-color: #fcfbfc;

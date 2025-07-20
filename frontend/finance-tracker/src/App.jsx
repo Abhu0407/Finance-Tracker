@@ -14,36 +14,36 @@ import Income from './pages/dashboard/income';
 import UserProvider from './context/userContext';
 
 
-function App() {
-  return (
-    <UserProvider>
-      <div>
-        <Router>
-          <Routes>
-            <Route path="/" element={< Root />} />
-            <Route path="/login" exact element={<Login />} />
-            <Route path="/signup" exact element={<SignUp />} />
-            <Route path="/dashboard" exact element={<Home />} />
-            <Route path="/income" exact element={<Income />} />
-            <Route path="/expense" exact element={<Expense />} />
-          </Routes>
-        </Router>
-      </div>
-    </UserProvider>
-  )
-}
+const App = () => (
+  <UserProvider>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/dashboard"
+          element={<ProtectedRoute><Home /></ProtectedRoute>}
+        />
+        <Route
+          path="/"
+          element={<ProtectedRoute><Home /></ProtectedRoute>}
+        />
+        <Route
+          path="/income"
+          element={<ProtectedRoute><Income /></ProtectedRoute>}
+        />
+        <Route
+          path="/expense"
+          element={<ProtectedRoute><Expense /></ProtectedRoute>}
+        />
+      </Routes>
+    </Router>
+  </UserProvider>
+);
 
-export default App
-
-const Root = () => {
-  // Check if token exists in localStorage
-  const isAuthenticated = !!localStorage.getItem("token");
-
-  // Redirect to dashboard if authenticated, otherwise to login
-
-  return isAuthenticated ? (
-    <Navigate to="/dashboard" />
-  ) : (
-    <Navigate to="/login" />
-  );
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/login" />;
 };
+
+export default App;
