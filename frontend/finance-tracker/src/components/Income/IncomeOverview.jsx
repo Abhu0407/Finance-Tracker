@@ -6,12 +6,11 @@ import { prepareIncomeBarChartData } from '../../utils/helper';
 const IncomeOverview = ({ transactions, onAddIncome }) => {
     const [chartData, setChartData] = useState([]);
 
-    // useEffect(() => {
-    //     const result = prepareIncomeBarChartData(transactions);
-    //     setChartData(result);
-
-    //     return () => { };
-    // }, [transactions]);
+    useEffect(() => {
+        const safeTransactions = Array.isArray(transactions) ? transactions : [];
+        const result = prepareIncomeBarChartData(safeTransactions);
+        setChartData(result);
+    }, [transactions]);
     return (
         <div className='card'>
             <div className='flex items-center justify-between'>
@@ -28,7 +27,7 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
                 </button>
             </div>
             <div className='mt-10'>
-                {/* <CustomBarChart data = {chartData} /> */}
+                <CustomBarChart data = {chartData} />
             </div>
         </div>
     )

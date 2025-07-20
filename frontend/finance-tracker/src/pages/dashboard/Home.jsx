@@ -102,10 +102,10 @@ function Home() {
             data = {dashboardData?.last30DaysExpense?.transactions || []}
           />
 
-          {/* <RecentIncomeWithChart
-            data = {dashboardData?.last60DaysIncome?.transactions?.silce(0,4) || []}
+          <RecentIncomeWithChart
+            data = {dashboardData?.last60DaysIncome?.transactions?.slice(0,4) || []}
             totalIncome = {dashboardData?.totalIncome || 0}
-          /> */}
+          />
 
           <RecentIncome
             transactions= {dashboardData?.last60DaysIncome?.transactions || []}

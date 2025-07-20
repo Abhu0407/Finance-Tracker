@@ -38,14 +38,12 @@ export const prepareExpenseBarChartData = (data = []) => {
     return chartData;
 };
 
-export const prepareIncomeBarChartData = (date = []) => {
-    const sortedData = [...data].sort((a,b) => new Date(a.date) - new Date(b.date));
-
-    const chartData = sortedData.map((item) => ({
-        month: moment(item?.date).format("Do MMM"),
-        amount: item?.amount,
-        source: item?.source,
+export const prepareIncomeBarChartData = (data = []) => {
+    if (!Array.isArray(data)) return [];
+    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+    return sortedData.map((item) => ({
+        month: item?.date ? moment(item.date).format("Do MMM") : "Unknown",
+        amount: Number(item?.amount) || 0,
+        source: item?.source || "Unknown",
     }));
-
-    return chartData;
 };
