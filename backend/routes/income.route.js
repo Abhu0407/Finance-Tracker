@@ -6,7 +6,7 @@ import { protectRoute } from '../middleware/auth.middleware.js';
 const router = express.Router();
 
 router.post("/add", protectRoute, addIncome);
-router.get("/all", protectRoute, getAllIncome);
+router.get("/get", protectRoute, getAllIncome);
 router.delete("/:id", protectRoute, deleteIncome);
 router.get("/downloadexcel", protectRoute, downloadIncomeExcel);
 
