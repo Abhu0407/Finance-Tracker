@@ -94,7 +94,24 @@ function Income() {
 
   // Placeholder: Handle download
   const handleDownloadIncomeDetails = async () => {
-    // TODO: Implement logic
+    try {
+      const response = await axiosInstance.get(API_PATH.INCOME.DOWNLOAD_INCOME, {
+        responseType: "blob"
+      });
+
+      // create a URL for the blob
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "expense_detail.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error(" Error downloading Income details: ", error.message);
+      toast.error(" Error downloading Income details. Please try again.");
+    }
   };
 
   // Fetch income data on mount

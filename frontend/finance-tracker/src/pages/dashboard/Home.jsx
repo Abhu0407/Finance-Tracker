@@ -45,6 +45,21 @@ function Home() {
     }
   };
 
+  const handleDeleteTransaction = async (transactionId, type) => {
+    try {
+      const endpoint = type === 'Income' 
+        ? API_PATH.INCOME.DELETE_INCOME(transactionId)
+        : API_PATH.EXPENSE.DELETE_EXPENSE(transactionId);
+
+      await axiosInstance.delete(endpoint);
+      
+      // Refresh dashboard data after deletion
+      fetchDashboardData();
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+    }
+  };
+
 
   useEffect(() => {
     fetchDashboardData();
@@ -83,8 +98,9 @@ function Home() {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6'>
 
           <RecentTransactions 
-            transactions = {dashboardData?.recentTransactions}
+            transactions = {dashboardData?.recentTransaction}
             onSeeMore= { () => navigate("/expense")}
+            onDelete={handleDeleteTransaction}
           />
 
           <FinanceOverview 
@@ -96,6 +112,7 @@ function Home() {
           <ExpenseTransactions 
             transactions = {dashboardData?.last30DaysExpense?.transactions || []}
             onSeeMore= { () => navigate("/expense")}
+            onDelete={handleDeleteTransaction}
           />
 
           <Last30DayExpence 
@@ -110,6 +127,7 @@ function Home() {
           <RecentIncome
             transactions= {dashboardData?.last60DaysIncome?.transactions || []}
             onSeeMore= { () => navigate("/income")}
+            onDelete={handleDeleteTransaction}
           />
 
         </div>
