@@ -41,7 +41,7 @@ if(process.env.NODE_ENV=="production"){
     
     app.get("*", (req, res) => {
         res.sendFile(path.join(__dirname, "../frontend/finance-tracker", "dist", "index.html"));
-    }
+    });
 }
 
 app.listen(PORT, () => {
