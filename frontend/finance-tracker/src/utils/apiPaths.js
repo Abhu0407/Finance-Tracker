@@ -14,13 +14,13 @@ export const API_PATH = {
         ADD_INCOME: "/api/income/add",
         GET_ALL_INCOME: "/api/income/get",
         DELETE_INCOME: (incomeId) => `/api/income/delete/${incomeId}`,
-        DOWNLOAD_INCOME: "/api/income/download",
+        DOWNLOAD_INCOME: "/api/income/downloadexcel",
     },
     EXPENSE: {
         ADD_EXPENSE: "/api/expense/add",
         GET_ALL_EXPENSE: "/api/expense/all",
         DELETE_EXPENSE: (expenseId) => `/api/expense/delete/${expenseId}`,
-        DOWNLOAD_EXPENSE: "/api/expense/download",
+        DOWNLOAD_EXPENSE: "/api/expense/downloadexcel",
     },
 };
 

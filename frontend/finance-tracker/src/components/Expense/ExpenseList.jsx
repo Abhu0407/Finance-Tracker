@@ -3,14 +3,19 @@ import React from 'react'
 import { LuDownload } from 'react-icons/lu'
 import TransactinInfoCard from '../Cards/TransactinInfoCard'
 
-const ExpenseList = ({ transactions, onDelete, onDownLoad }) => {
+const ExpenseList = ({ transactions, onDelete, onDownLoad, loading = false }) => {
   return (
     <div className='card'>
         <div className='flex items-center justify-between'>
             <h5 className='text-lg'>All Expense</h5>
 
-            <button className='card-btn' onClick={onDownLoad}>
-                <LuDownload className='text-base' /> Download
+            <button 
+              className='card-btn' 
+              onClick={onDownLoad}
+              disabled={loading}
+            >
+                <LuDownload className='text-base' /> 
+                {loading ? 'Downloading...' : 'Download'}
             </button>
         </div>
 

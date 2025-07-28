@@ -55,7 +55,12 @@ function Home() {
       
       // Refresh dashboard data after deletion
       fetchDashboardData();
+      
+      // Show success toast
+      toast.success(`${type} deleted successfully`);
     } catch (error) {
+      // Show error toast
+      toast.error(`Error deleting ${type.toLowerCase()}: ${error.response?.data?.message || error.message}`);
       console.error("Error deleting transaction:", error);
     }
   };
@@ -76,6 +81,7 @@ function Home() {
             label="Total Balance"
             value = { addThousandsSeparator(dashboardData?.totalBalance || 0) }
             color = "bg-primary"
+            valueColor={ (dashboardData?.totalBalance ?? 0) >= 0 ? 'text-green-500' : 'text-red-500' }
           />
 
           <InfoCard 
@@ -83,6 +89,7 @@ function Home() {
             label="Total Income"
             value = { addThousandsSeparator(dashboardData?.totalIncome || 0) }
             color = "bg-orange-500"
+            valueColor="text-green-500"
           />
 
           <InfoCard 
@@ -90,6 +97,7 @@ function Home() {
             label="Total Expense"
             value = { addThousandsSeparator(dashboardData?.totalExpense || 0) }
             color = "bg-red-500"
+            valueColor="text-red-500"
           />
 
           

@@ -11,6 +11,7 @@ import Login from './pages/auth/Login';
 import Home from './pages/dashboard/Home';
 import Expense from './pages/dashboard/Expense';
 import Income from './pages/dashboard/income';
+import About from './pages/dashboard/About';
 import UserProvider from './context/userContext';
 import { Toaster } from 'react-hot-toast';
 
@@ -36,6 +37,10 @@ const App = () => (
         <Route
           path="/expense"
           element={<ProtectedRoute><Expense /></ProtectedRoute>}
+        />
+        <Route
+          path="/about"
+          element={<ProtectedRoute><About /></ProtectedRoute>}
         />
       </Routes>
     </Router>

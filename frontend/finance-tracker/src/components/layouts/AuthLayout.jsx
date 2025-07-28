@@ -4,30 +4,10 @@ import { LuTrendingUpDown } from "react-icons/lu";
 
 const AuthLayout = ({ children }) => {
     return (
-        <div className='flex'>
-            <div className='w-screen h-screen md:w-[60vw] px-12 pt-8 pb=12'>
-                <h2 className='text-lg font-medium text-black'>Finance Tracker</h2>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-white px-4">
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-md border border-gray-200/50 p-8">
+                <h2 className="text-2xl font-bold text-primary text-center mb-6">Finance Tracker</h2>
                 {children}
-            </div>
-
-            <div className=' hidden md:block w-[40vw] h-screen bg-violet-50 bg-auth-bg-img bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative'>
-                <div className='w-48 h-48 rounded-[40px] bg-purple-600 absolute -top-7 -left-5' />
-                <div className='w-48 h-56 rounded-[40px] border-[20px] border-fuchsia-600 absolute top-[30%] -right-10' />
-                <div className='w-48 h-48 rounded-[40px] bg-violet-500 absolute -bottom-7 -left-9' />
-
-                <div className='grid grid-cols-1 z-20'>
-                    <StatsInfoCard
-                        icon={<LuTrendingUpDown />}
-                        label="Track your Income & Expenses"
-                        value="430,000"
-                        color="bg-primary"
-                    />
-                </div>
-
-                <img
-                    src={CHART}
-                    className='w-64 lg:w-[90%] absolute bottom-10 shadow-blue-400/15'
-                />
             </div>
         </div>
     )

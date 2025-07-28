@@ -92,25 +92,34 @@ function Income() {
     }
   };
 
-  // Placeholder: Handle download
+  // Handle download
   const handleDownloadIncomeDetails = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get(API_PATH.INCOME.DOWNLOAD_INCOME, {
         responseType: "blob"
       });
 
-      // create a URL for the blob
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "expense_detail.xlsx");
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      // Check if response is valid
+      if (response.data && response.data.size > 0) {
+        // create a URL for the blob
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "income_details.xlsx");
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        toast.success("Income details downloaded successfully!");
+      } else {
+        toast.error("No data available to download");
+      }
     } catch (error) {
-      console.error(" Error downloading Income details: ", error.message);
-      toast.error(" Error downloading Income details. Please try again.");
+      console.error("Error downloading Income details: ", error.message);
+      toast.error("Error downloading Income details. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,6 +145,7 @@ function Income() {
               setOpenDeleteAlert({ show: true, data: id})
             }}
             onDownLoad = {handleDownloadIncomeDetails}
+            loading={loading}
           />
         </div>
 

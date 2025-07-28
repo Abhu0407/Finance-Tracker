@@ -74,7 +74,7 @@ function SignUp() {
 
   return (
     <AuthLayout>
-      <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
+      <div className='max-w-md mx-auto bg-white  p-8 mt-12 flex flex-col justify-center'>
         <h3 className='text-xl font-semibold text-black'>Create an Account</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
           Create a new account to get started
@@ -82,7 +82,6 @@ function SignUp() {
 
         <form onSubmit={handleSignUp}>
 
-          <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 
