@@ -36,9 +36,8 @@ app.use("/api/expense", expenseRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 
-if(process.env.NODE_ENV==="production"){
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../frontend/finance-tracker/dist")));
-    
     app.get("/*", (req, res) => {
         res.sendFile(path.join(__dirname, "../frontend/finance-tracker", "dist", "index.html"));
     });
